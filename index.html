@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Henrique Koiti Souza Hatano — Software Engineer</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #ffffff;
+      --surface:   #f7f8fa;
+      --border:    #e5e7eb;
+      --text:      #1f2328;
+      --muted:     #57606a;
+      --accent:    #1f2328;
+      --radius:    8px;
+      --max-w:     760px;
+      --font:      -apple-system, "Segoe UI", system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout wrapper ───────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    #hero {
+      padding: 96px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    #hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.15s, background 0.15s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+      border: 1px solid var(--text);
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { background: var(--surface); }
+
+    /* ── Section shared ───────────────────────────────────────── */
+    section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 20px;
+    }
+
+    /* ── About ────────────────────────────────────────────────── */
+    #about p {
+      color: var(--muted);
+      max-width: 580px;
+    }
+
+    /* ── Timeline ─────────────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      margin-top: 40px;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 36px;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+    }
+
+    .timeline-item.current::before {
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .timeline-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .timeline-company {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .timeline-period {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 1px 7px;
+      border-radius: 4px;
+      background: var(--text);
+      color: #fff;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    /* ── Projects ─────────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    /* Project card */
+    .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 160px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card:hover {
+      border-color: #adb5bd;
+      transform: translateY(-2px);
+    }
+
+    .project-card:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+
+    .project-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .project-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .project-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--border);
+      color: var(--muted);
+    }
+
+    .project-card-arrow {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 16px;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover .project-card-arrow { transform: translate(2px, -2px); }
+
+    /* Empty placeholder cards */
+    .project-card.placeholder {
+      border-style: dashed;
+      background: transparent;
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      padding: 36px 0;
+      display: flex;
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p { font-size: 13px; color: var(--muted); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 520px) {
+      #hero { padding: 64px 0 56px; }
+      .nav-links { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav>
+    <div class="container">
+      <span class="nav-logo">HH.</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="https://github.com/HenriqueHatano" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/henrique-koiti-souza-hatano-3962251a5/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <h1>Henrique Koiti Souza Hatano<br/>Software Engineer</h1>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-outline" href="https://github.com/HenriqueHatano" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/henrique-koiti-souza-hatano-3962251a5/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ───────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About</p>
+      <h2 class="section-title">A bit about me</h2>
+      <p>
+        I am a Software Developer at IBM, working primarily with automation, data analysis, and corporate solution modeling using Planning Analytics (TM1). In my daily work, I contribute to the development and maintenance of financial cubes, business rules, ETL processes, and automations that support strategic decision-making and critical business workflows.
+        I have hands-on experience with Python and SQL (DB2), and I frequently work on scripts and processes for data extraction, transformation, and validation. I also actively participate in improving existing models, fixing complex business logic, and collaborating with global teams on technical alignments.
+        Throughout my journey at IBM, I have been building a solid foundation in software engineering applied to enterprise environments, with a strong focus on quality, security, clear business logic, and teamwork.
+        I am continuously learning and expanding my skills, especially in automation, backend development, and AI applied to data, aiming to grow as a developer and create real impact through technology.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Experience ───────────────────────────────────────────── -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Career</h2>
+
+      <div class="timeline">
+
+        <!-- IBM -->
+        <div class="timeline-item current">
+          <div class="timeline-meta">
+            <span class="timeline-role">
+              Software Developer Intern
+              <span class="timeline-badge">Now</span>
+            </span>
+            <span class="timeline-company">IBM</span>
+            <span class="timeline-period">2024 — Present</span>
+          </div>
+          <p class="timeline-desc">
+            Working on software development projects at IBM, contributing to internal tools and products.
+          </p>
+        </div>
+
+        <!-- Add more entries below as your career grows:
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-role">Job Title</span>
+            <span class="timeline-company">Company Name</span>
+            <span class="timeline-period">Year — Year</span>
+          </div>
+          <p class="timeline-desc">Short description of what you did.</p>
+        </div>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ────────────────────────────────────────────── -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">Projects</h2>
+      <p style="color:var(--muted); font-size:14px;">
+        More projects coming soon. Each card links directly to its GitHub repository.
+      </p>
+
+      <div class="projects-grid" id="projects-grid">
+
+        <!-- ── Add your real projects here ──────────────────────
+             Copy a .project-card block, fill in:
+               href        → your GitHub repo URL
+               title       → project name
+               description → one-liner
+               tags        → tech stack tags
+        ──────────────────────────────────────────────────────── -->
+
+        <!-- Placeholder 1 -->
+        <div class="project-card placeholder" aria-hidden="true">
+          <span class="project-card-title">Project coming soon</span>
+          <span class="project-card-desc">This slot is reserved for an upcoming project.</span>
+          <div class="project-card-tags">
+            <span class="tag">TBD</span>
+          </div>
+        </div>
+
+        <!-- Placeholder 2 -->
+        <div class="project-card placeholder" aria-hidden="true">
+          <span class="project-card-title">Project coming soon</span>
+          <span class="project-card-desc">This slot is reserved for an upcoming project.</span>
+          <div class="project-card-tags">
+            <span class="tag">TBD</span>
+          </div>
+        </div>
+
+        <!-- Placeholder 3 -->
+        <div class="project-card placeholder" aria-hidden="true">
+          <span class="project-card-title">Project coming soon</span>
+          <span class="project-card-desc">This slot is reserved for an upcoming project.</span>
+          <div class="project-card-tags">
+            <span class="tag">TBD</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Henrique Hatano</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/HenriqueHatano" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/henrique-koiti-souza-hatano-3962251a5/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
